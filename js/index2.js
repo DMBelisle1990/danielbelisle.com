@@ -4,9 +4,11 @@
 	const NAV_FADE = 200;
 	var $headerNav = $('.header-nav-wrapper ul');
 	var $close = $('.close');
-	var $lowerNav = $('#lower-nav .subpage-launch');
-	var $upperNav = $('#upper-nav .subpage-launch');
+	// var $lowerNav = $('#lower-nav .subpage-launch');
+	// var $upperNav = $('#upper-nav .subpage-launch');
 	var activeIdx;
+	var prevPage;
+	var prevBg;
 
 	class Subpage {
 
@@ -24,11 +26,9 @@
 		}
 
 		bindEvents() {
-			// Hover events
 			this.hoverTrigger.on('mouseover', this.fadeInBg.bind(this))
 	  		 				 .on('mouseout', this.fadeOutBg.bind(this));
 
-			// Click events
 			this.clickTrigger.on('click', this.raise.bind(this));
 			$close.on('click', this.lower.bind(this));
 		}
@@ -44,7 +44,6 @@
 		}
 
 		raise() {
-			console.log($upperNav.index(this.clickTrigger));
 			if(!this.active) {
 				// Drop visible subpage
 				var $show = $('.show');
@@ -59,8 +58,9 @@
 				var $active = $('.active');
 				$active.css({'opacity': 0});
 				$active.toggleClass('active');
-				this.background.toggleClass('active');
-				this.background.css({'opacity': 1});
+
+				this.background.toggleClass('active')
+							   .css({'opacity': 1});
 				this.page.css({'top': '0%'});
 				this.active = true;
 			}
@@ -104,15 +104,13 @@
 
 	// Testing stuff down here
 
-	$('#lower-nav .subpage-launch, #upper-nav .subpage-launch').on('click', function() {
-		if(activeIdx !== undefined) {
-			// $lowerNav[activeIdx].classList.remove('active');
-			$upperNav[activeIdx].classList.remove('active');
-		}
-		activeIdx = $(this).index();
-		$lowerNav[activeIdx].classList.add('active');
-		// $upperNav[activeIdx].classList.add('active');
-	});
+	// $('#lower-nav .subpage-launch, #upper-nav .subpage-launch').on('click', function() {
+	// 	if(activeIdx !== undefined) {
+	// 		$upperNav[activeIdx].classList.remove('active');
+	// 	}
+	// 	activeIdx = $(this).index();
+	// 	$lowerNav[activeIdx].classList.add('active');
+	// });
 
 
 

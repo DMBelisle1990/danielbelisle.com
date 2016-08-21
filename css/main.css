@@ -84,7 +84,6 @@ a {
 	z-index: -1;
 	background-color: #333;
 	opacity: .7;
-	transition: background-color 0.4s ease;
 }
 
 .background.work {
@@ -155,11 +154,6 @@ a {
 
 .main-nav div a {
 	color: #fff;
-}
-
-#gear-wrapper {
-	margin: 100px auto;
-	width: 100px;
 }
 
 #title-wrapper {
