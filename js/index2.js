@@ -2,7 +2,6 @@
 	'use strict';
 
 	const NAV_FADE = 200;
-	var $homeBg = $('.background.home');
 	var $headerNav = $('.header-nav-wrapper ul');
 	var $close = $('.close');
 	var $lowerNav = $('#lower-nav .subpage-launch');
@@ -35,14 +34,12 @@
 		}
 
 		fadeInBg() {
-			$homeBg.css({'opacity': 0});
 			this.background.css({'opacity': 1});	
 		}
 
 		fadeOutBg() {
 			if(!this.active) {
 				this.background.css({'opacity': 0});
-				$homeBg.css({'opacity': 1});
 			}
 		}
 
@@ -74,8 +71,6 @@
 				this.active = false;
 				$('.active').css({'opacity': 0});
 				$('.active').toggleClass('active');
-				$homeBg.toggleClass('active');
-				$homeBg.css({'opacity': 1});
 				$('.show').css({'top': '105%'});
 				$('.show').toggleClass('show');
 				$('.header-nav-wrapper ul').fadeOut(NAV_FADE);
