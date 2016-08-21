@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Daniel Belisle | Front End Developer</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<section class="content-container">
+
+	<header>
+		<nav class="header-nav">
+			<div class="header-nav-wrapper">
+				<ul id="upper-nav">
+					<li class="about-launch subpage-launch"><a href="#">About</a></li>
+					<li class="work-launch subpage-launch"><a href="#">Work</a></li>
+					<li class="contact-launch subpage-launch"><a href="#">Contact</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div id="title-wrapper">
+			<h1 class="title-lg">Daniel Belisle</h1>
+			<h2 class="title-sm">Front End Developer</h2>
+		</div>
+	</header>
+
+	<nav class="main-nav">
+		<div id="lower-nav">
+			<div class="about-launch subpage-launch bg-hover about-hover">
+				<a href="#">
+					<span class="icon-text">About</span>
+				</a>
+			</div>
+			<div class="work-launch subpage-launch bg-hover work-hover">
+				<a href="#">
+					<span class="icon-text">Work</span>
+				</a>
+			</div>
+			<div class="contact-launch subpage-launch bg-hover contact-hover">
+				<a href="#">
+					<span class="icon-text">Contact</span>
+				</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="background-overlay"></div>
+	<div class="background home active"></div>
+	<div class="background about"></div>
+	<div class="background work"></div>
+	<div class="focus-underlay"></div>
+	<div class="background contact"></div>
+
+	<section id="about" class="pop-up">
+	
+	</section>
+
+	<section id="work" class="pop-up">
+		<div class="focus-underlay"></div>
+		<div class="close">
+			<img src="images/down_arrow.svg" width="50">
+		</div>
+		<div class="work-container">
+			<div class="row">
+				<div class="col-6">
+					<div class="project"></div>
+				</div><!--
+				--><div class="col-6">
+					<div class="project"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					<div class="project"></div>
+				</div><!--
+				--><div class="col-6">
+					<div class="project"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					<div class="project"></div>
+				</div><!--
+				--><div class="col-6">
+					<div class="project"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					<div class="project"></div>
+				</div><!--
+				--><div class="col-6">
+					<div class="project"></div>
+				</div>
+			</div>
+		</div>
+		<div class="project-container">
+
+		</div>
+	</section>
+
+	<section id="contact" class="pop-up">
+		<div class="close">
+			<img src="images/down_arrow.svg" width="50">
+		</div>
+		<p>Contact</p>
+	</section>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src='js/index2.js'></script>
+	<script type="text/javascript">
+	$(".about-launch").on("click", function() {
+		$.ajax({url: "about/index.html", success: function(result){
+        	$("#about").html(result);
+    	}});
+	});
+	</script>
+</section>
+</body>
+</html>
