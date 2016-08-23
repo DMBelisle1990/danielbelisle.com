@@ -4,14 +4,11 @@
 	const NAV_FADE = 200;
 	var $headerNav = $('.header-nav-wrapper ul');
 	var $close = $('.close');
-	// var $lowerNav = $('#lower-nav .subpage-launch');
-	// var $upperNav = $('#upper-nav .subpage-launch');
 	var activeIdx;
-	var prevPage;
-	var prevBg;
+	var $activePage;
+	var $activeBg;
 
 	class Subpage {
-
 		constructor(options) {
 			this.page = options.page;
 			this.hoverTrigger = options.hoverTrigger;
@@ -45,23 +42,18 @@
 
 		raise() {
 			if(!this.active) {
-				// Drop visible subpage
-				var $show = $('.show');
-				if($show.length) {
-					$show.css({'top': '105%'});
-					$show.toggleClass('show');
+				// Lower previous active subpage
+				if($activePage) {
+					$activePage.css({'top': '105%'});
 				}
-
-				// fade in header nav
+				$activePage = this.page; 
 				$headerNav.fadeIn(NAV_FADE);
-
-				var $active = $('.active');
-				$active.css({'opacity': 0});
-				$active.toggleClass('active');
-
-				this.background.toggleClass('active')
-							   .css({'opacity': 1});
-				this.page.css({'top': '0%'});
+				if($activeBg) {
+					$activeBg.css({'opacity': 0})
+				}
+				$activeBg = this.background;
+				$activeBg.css({'opacity': 1});
+				$activePage.css({'top': '0%'});
 				this.active = true;
 			}
 		}
@@ -69,17 +61,15 @@
 		lower() {
 			if(this.active) {
 				this.active = false;
-				$('.active').css({'opacity': 0});
-				$('.active').toggleClass('active');
-				$('.show').css({'top': '105%'});
-				$('.show').toggleClass('show');
-				$('.header-nav-wrapper ul').fadeOut(NAV_FADE);
+				$activeBg.css({'opacity': 0});
+				$activeBg = null;
+				$activePage.css({'top': '105%'});
+				$activePage = null;
+				$headerNav.fadeOut(NAV_FADE);
 			}
 		}
-
 	}
 
-	// Each selector is only called twice so this suffices as a DOM Cache
 	var about = new Subpage({
 		page: $('#about'),
 		hoverTrigger: $('.about-hover'),
@@ -100,20 +90,6 @@
 		background: $('.background.contact'),
 		clickTrigger: $('.contact-launch')
 	});
-
-
-	// Testing stuff down here
-
-	// $('#lower-nav .subpage-launch, #upper-nav .subpage-launch').on('click', function() {
-	// 	if(activeIdx !== undefined) {
-	// 		$upperNav[activeIdx].classList.remove('active');
-	// 	}
-	// 	activeIdx = $(this).index();
-	// 	$lowerNav[activeIdx].classList.add('active');
-	// });
-
-
-
 
 })();
 
