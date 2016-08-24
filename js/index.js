@@ -1,112 +1,94 @@
 (function() {
+	'use strict';
 
 	const NAV_FADE = 200;
-	const GREY = '#333';
-	const BLUE = '#1a75ff';
-	const PURPLE = '#a64dff';
-	const BROWN = '#994d00';
-	const ORANGE = '#FAAC42'
-
-	/*
-	 * DOM Cache
-	 */
-
-	// Hover triggers
-	var $aboutHover = $('.about-hover');
-	var $workHover = $('.work-hover');
-	var $contactHover = $('.contact-hover');
-
-	// Click triggers
-	var $aboutlaunch = $('.about-launch');
-	var $worklaunch = $('.work-launch');
-	var $contactlaunch = $('.contact-launch');
-
-	// Backgrounds
+	var $headerNav = $('.header-nav-wrapper ul');
+	var $close = $('.close');
+	var activeIdx;
+	var $activePage;
+	var $activeBg;
+	var $lowerNav = $('#lower-nav');
 	var $homeBg = $('.background.home');
-	var $aboutBg = $('.background.about');
-	var $workBg = $('.background.work');
-	var $contactBg = $('.background.contact');
 
-	// Subpages
-	var $about = $('#about');
-	var $work = $('#work');
-	var $contact = $('#contact');
-
-	var activatorClicked = false;
-
-	/*
-	 * HOVER EFFECTS
-	 */
-
-	function set_hover_effects($activator, $background) {
-
-		$activator.on('mouseover', function() {
-
-			$homeBg.css({'opacity': 0});
-			$background.css({'opacity': 1});
-
-		}).on('mouseout', function() {
-
-			if(!activatorClicked) {
-				$background.css({'opacity': 0});
-				$homeBg.css({'opacity': 1});
+	// Using ES6 cleaner object notation, may need to change for friendlier backward compatability
+	var subpage = {
+		init(options) {
+			this.active = false;
+			this.page = options.page;
+			this.hoverTrigger = options.hoverTrigger;
+			this.background = options.background;
+			this.clickTrigger = options.clickTrigger;
+			this.bindEvents();
+		},
+		bindEvents() {
+			this.hoverTrigger.hover(this.fadeInBg.bind(this), this.fadeOutBg.bind(this));	  		 				 
+	  		$lowerNav.hover(function() { 
+	  			$homeBg.css({opacity: 0}); 
+	  		}, function() { 
+	  			$homeBg.css({opacity: 1}); 
+	  		});
+			this.clickTrigger.on('click', this.raise.bind(this));
+			$close.on('click', this.lower.bind(this));
+		},
+		fadeInBg() {
+			this.background.css({'opacity': 1});	
+		},
+		fadeOutBg() {
+			if(!this.active) {  // Only fades on the BG if the subpage is not showing
+				this.background.css({'opacity': 0});
 			}
-
-		});
-
+		},
+		raise() {
+			this.active = true;
+			if($activePage) {
+				$activePage.css({'top': '105%'});  // Lower previous active subpage
+			}
+			$activePage = this.page; 
+			$headerNav.fadeIn(NAV_FADE);
+			if($activeBg) {
+				$activeBg.css({'opacity': 0})
+			}
+			$activeBg = this.background;
+			$activeBg.css({'opacity': 1});
+			$activePage.css({'top': '0%'});
+		},
+		lower() {
+			this.active = false;
+			if($activeBg) {
+				$activeBg.css({'opacity': 0});
+			}
+			$activeBg = null;
+			if($activePage) {
+				$activePage.css({'top': '105%'});
+			}
+			$activePage = null;
+			$headerNav.fadeOut(NAV_FADE);
+		}
 	}
 
-	set_hover_effects($aboutHover, $aboutBg);
-	set_hover_effects($workHover, $workBg);
-	set_hover_effects($contactHover, $contactBg);
-
-
-	/*
-	 * CLICK EFFECTS
-	 */
-
-	function set_click_effects($activator, $page, $background) {
-		$activator.on('click', function() {
-
-			activatorClicked = true;
-
-
-			// If the show class is present, drop the page and remove the show class from it
-			if($('.show').length) {
-				$('.show').css({'top': '105%'});
-				$('.show').toggleClass('show');
-			}
-
-			$page.css({'top': '0%'});
-			$page.toggleClass('show');
-			$('.header-nav-wrapper ul').fadeIn(NAV_FADE);
-
-			// Backgrounds set here
-			$('.active').css({'opacity': 0});
-			$('.active').toggleClass('active');
-			$background.toggleClass('active');
-			$background.css({'opacity': 1});
-
-		});
-	}
-
-	set_click_effects($aboutlaunch, $about, $aboutBg);
-	set_click_effects($worklaunch, $work, $workBg);
-	set_click_effects($contactlaunch, $contact, $contactBg);
-
-	$('.close').on('click', function() {
-		
-		activatorClicked = false;
-		$('.active').css({'opacity': 0});
-		$('.active').toggleClass('active');
-		$homeBg.toggleClass('active');
-		$homeBg.css({'opacity': 1});
-		$('.show').css({'top': '105%'});
-		$('.show').toggleClass('show');
-		$('.header-nav-wrapper ul').fadeOut(NAV_FADE);
-
+	var about = Object.create(subpage);
+	about.init({
+		page: $('#about'),
+		hoverTrigger: $('.about-hover'),
+		background: $('.background.about'),
+		clickTrigger: $('.about-launch')
+	});
+	
+	var work = Object.create(subpage);
+	work.init({
+		page: $('#work'),
+		hoverTrigger: $('.work-hover'),
+		background: $('.background.work'),
+		clickTrigger: $('.work-launch')
 	});
 
+	var contact = Object.create(subpage);
+	contact.init({
+		page: $('#contact'),
+		hoverTrigger: $('.contact-hover'),
+		background: $('.background.contact'),
+		clickTrigger: $('.contact-launch')
+	});
 
 })();
 
