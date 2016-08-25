@@ -3,7 +3,6 @@
 
 	const NAV_FADE = 200;
 	var $headerNav = $('.header-nav-wrapper ul');
-	var $close = $('.close');
 	var activeIdx;
 	var $activePage;
 	var $lowerNav = $('#lower-nav');
@@ -17,6 +16,7 @@
 			this.hoverTrigger = options.hoverTrigger;
 			this.background = options.background;
 			this.clickTrigger = options.clickTrigger;
+			this.$close = options.selector.find($('.close'));
 			this.bindEvents();
 		},
 		bindEvents() {
@@ -26,8 +26,8 @@
   		}, function() {
   			$homeBg.css({opacity: 1});
   		});
-			this.clickTrigger.on('click', this.raise.bind(this));
-			$close.on('click', this.lower.bind(this));
+			this.clickTrigger.on('click', this.togglePage.bind(this));
+			this.$close.on('click', this.returnHome.bind(this));
 		},
 		fadeInBg() {
 			this.background.css({'opacity': 1});
@@ -39,33 +39,26 @@
 		},
 		togglePage() {
 			subpageHidden = false;
-		},
-		raise() {
-			subpageHidden = false;
-			if($activePage) { // If a page is showing, lower it
-				$activePage.selector.css({'top': '105%'});
-				$activePage.background.css({'opacity': 0});
+			$headerNav.fadeIn(NAV_FADE);
+			if($activePage) {
+				$activePage.lower();
 			}
 			$activePage = this;
-
-			$headerNav.fadeIn(NAV_FADE);
-
-			// $activeBg = $activePage.background;
-			$activePage.background.css({'opacity': 1});
-			$activePage.selector.css({'top': '0%'});
+			$activePage.raise();
+		},
+		raise() {
+			this.background.css({'opacity': 1});
+			this.selector.css({'top': '0%'});
 		},
 		lower() {
-			subpageHidden = true;
-			if($activePage) {
-				$activePage.background.css({'opacity': 0});
-				$activePage.selector.css({'top': '105%'});
-			}
-
-			$activePage = null;
-			$headerNav.fadeOut(NAV_FADE);
+			this.background.css({'opacity': 0});
+			this.selector.css({'top': '105%'});
 		},
-		close() {
-
+		returnHome() {
+			this.lower.call($activePage);
+			subpageHidden = true;
+			$headerNav.fadeOut(NAV_FADE);
+			$activePage = null;
 		}
 	}
 
