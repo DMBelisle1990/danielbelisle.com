@@ -9,11 +9,11 @@
 	var $activeBg;
 	var $lowerNav = $('#lower-nav');
 	var $homeBg = $('.background.home');
+	var subpageHidden = true;
 
 	// Using ES6 cleaner object notation, may need to change for friendlier backward compatability
 	var subpage = {
 		init(options) {
-			this.active = false;
 			this.page = options.page;
 			this.hoverTrigger = options.hoverTrigger;
 			this.background = options.background;
@@ -25,7 +25,7 @@
   		$lowerNav.hover(function() {
   			$homeBg.css({opacity: 0});
   		}, function() {
-  			$homeBg.css({opacity: 1}); 
+  			$homeBg.css({opacity: 1});
   		});
 			this.clickTrigger.on('click', this.raise.bind(this));
 			$close.on('click', this.lower.bind(this));
@@ -34,12 +34,12 @@
 			this.background.css({'opacity': 1});
 		},
 		fadeOutBg() {
-			if(!this.active) {  // Only fades on the BG if the subpage is not showing
+			if(subpageHidden) {  // Only fades back to home BG if the subpage is hidden
 				this.background.css({'opacity': 0});
 			}
 		},
 		raise() {
-			this.active = true;
+			subpageHidden = false;
 			if($activePage) {
 				$activePage.css({'top': '105%'});  // Lower previous active subpage
 			}
@@ -53,7 +53,7 @@
 			$activePage.css({'top': '0%'});
 		},
 		lower() {
-			this.active = false;
+			subpageHidden = true;
 			if($activeBg) {
 				$activeBg.css({'opacity': 0});
 			}
