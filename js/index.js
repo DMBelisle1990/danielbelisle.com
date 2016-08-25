@@ -21,17 +21,17 @@
 			this.bindEvents();
 		},
 		bindEvents() {
-			this.hoverTrigger.hover(this.fadeInBg.bind(this), this.fadeOutBg.bind(this));	  		 				 
-	  		$lowerNav.hover(function() { 
-	  			$homeBg.css({opacity: 0}); 
-	  		}, function() { 
-	  			$homeBg.css({opacity: 1}); 
-	  		});
+			this.hoverTrigger.hover(this.fadeInBg.bind(this), this.fadeOutBg.bind(this));
+  		$lowerNav.hover(function() {
+  			$homeBg.css({opacity: 0});
+  		}, function() {
+  			$homeBg.css({opacity: 1}); 
+  		});
 			this.clickTrigger.on('click', this.raise.bind(this));
 			$close.on('click', this.lower.bind(this));
 		},
 		fadeInBg() {
-			this.background.css({'opacity': 1});	
+			this.background.css({'opacity': 1});
 		},
 		fadeOutBg() {
 			if(!this.active) {  // Only fades on the BG if the subpage is not showing
@@ -43,10 +43,10 @@
 			if($activePage) {
 				$activePage.css({'top': '105%'});  // Lower previous active subpage
 			}
-			$activePage = this.page; 
+			$activePage = this.page;
 			$headerNav.fadeIn(NAV_FADE);
 			if($activeBg) {
-				$activeBg.css({'opacity': 0})
+				$activeBg.css({'opacity': 0});
 			}
 			$activeBg = this.background;
 			$activeBg.css({'opacity': 1});
@@ -73,7 +73,7 @@
 		background: $('.background.about'),
 		clickTrigger: $('.about-launch')
 	});
-	
+
 	var work = Object.create(subpage);
 	work.init({
 		page: $('#work'),
@@ -91,8 +91,3 @@
 	});
 
 })();
-
-
-
-
-
