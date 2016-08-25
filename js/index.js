@@ -6,7 +6,6 @@
 	var $close = $('.close');
 	var activeIdx;
 	var $activePage;
-	var $activeBg;
 	var $lowerNav = $('#lower-nav');
 	var $homeBg = $('.background.home');
 	var subpageHidden = true;
@@ -14,7 +13,7 @@
 	// Using ES6 cleaner object notation, may need to change for friendlier backward compatability
 	var subpage = {
 		init(options) {
-			this.page = options.page;
+			this.selector = options.selector;
 			this.hoverTrigger = options.hoverTrigger;
 			this.background = options.background;
 			this.clickTrigger = options.clickTrigger;
@@ -38,37 +37,41 @@
 				this.background.css({'opacity': 0});
 			}
 		},
+		togglePage() {
+			subpageHidden = false;
+		},
 		raise() {
 			subpageHidden = false;
-			if($activePage) {
-				$activePage.css({'top': '105%'});  // Lower previous active subpage
+			if($activePage) { // If a page is showing, lower it
+				$activePage.selector.css({'top': '105%'});
+				$activePage.background.css({'opacity': 0});
 			}
-			$activePage = this.page;
+			$activePage = this;
+
 			$headerNav.fadeIn(NAV_FADE);
-			if($activeBg) {
-				$activeBg.css({'opacity': 0});
-			}
-			$activeBg = this.background;
-			$activeBg.css({'opacity': 1});
-			$activePage.css({'top': '0%'});
+
+			// $activeBg = $activePage.background;
+			$activePage.background.css({'opacity': 1});
+			$activePage.selector.css({'top': '0%'});
 		},
 		lower() {
 			subpageHidden = true;
-			if($activeBg) {
-				$activeBg.css({'opacity': 0});
-			}
-			$activeBg = null;
 			if($activePage) {
-				$activePage.css({'top': '105%'});
+				$activePage.background.css({'opacity': 0});
+				$activePage.selector.css({'top': '105%'});
 			}
+
 			$activePage = null;
 			$headerNav.fadeOut(NAV_FADE);
+		},
+		close() {
+
 		}
 	}
 
 	var about = Object.create(subpage);
 	about.init({
-		page: $('#about'),
+		selector: $('#about'),
 		hoverTrigger: $('.about-hover'),
 		background: $('.background.about'),
 		clickTrigger: $('.about-launch')
@@ -76,7 +79,7 @@
 
 	var work = Object.create(subpage);
 	work.init({
-		page: $('#work'),
+		selector: $('#work'),
 		hoverTrigger: $('.work-hover'),
 		background: $('.background.work'),
 		clickTrigger: $('.work-launch')
@@ -84,7 +87,7 @@
 
 	var contact = Object.create(subpage);
 	contact.init({
-		page: $('#contact'),
+		selector: $('#contact'),
 		hoverTrigger: $('.contact-hover'),
 		background: $('.background.contact'),
 		clickTrigger: $('.contact-launch')
