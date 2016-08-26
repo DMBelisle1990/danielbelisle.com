@@ -3,7 +3,6 @@
 
 	const NAV_FADE = 200;
 	var $headerNav = $('.header-nav-wrapper ul');
-	var activeIdx;
 	var $activePage;
 	var $lowerNav = $('#lower-nav');
 	var $homeBg = $('.background.home');
@@ -14,7 +13,7 @@
 		init(options) {
 			this.selector = options.selector;
 			this.hoverTrigger = options.hoverTrigger;
-			this.background = options.background;
+			this.bg = options.bg;
 			this.clickTrigger = options.clickTrigger;
 			this.$close = options.selector.find($('.close'));
 			this.bindEvents();
@@ -30,11 +29,11 @@
 			this.$close.on('click', this.returnHome.bind(this));
 		},
 		fadeInBg() {
-			this.background.css({'opacity': 1});
+			this.bg.css({'opacity': 1});
 		},
 		fadeOutBg() {
 			if(subpageHidden) {  // Only fades back to home BG if the subpage is hidden
-				this.background.css({'opacity': 0});
+				this.bg.css({'opacity': 0});
 			}
 		},
 		togglePage() {
@@ -47,11 +46,11 @@
 			$activePage.raise();
 		},
 		raise() {
-			this.background.css({'opacity': 1});
+			this.bg.css({'opacity': 1});
 			this.selector.css({'top': '0%'});
 		},
 		lower() {
-			this.background.css({'opacity': 0});
+			this.bg.css({'opacity': 0});
 			this.selector.css({'top': '105%'});
 		},
 		returnHome() {
@@ -66,7 +65,7 @@
 	about.init({
 		selector: $('#about'),
 		hoverTrigger: $('.about-hover'),
-		background: $('.background.about'),
+		bg: $('.background.about'),
 		clickTrigger: $('.about-launch')
 	});
 
@@ -74,7 +73,7 @@
 	work.init({
 		selector: $('#work'),
 		hoverTrigger: $('.work-hover'),
-		background: $('.background.work'),
+		bg: $('.background.work'),
 		clickTrigger: $('.work-launch')
 	});
 
@@ -82,7 +81,7 @@
 	contact.init({
 		selector: $('#contact'),
 		hoverTrigger: $('.contact-hover'),
-		background: $('.background.contact'),
+		bg: $('.background.contact'),
 		clickTrigger: $('.contact-launch')
 	});
 
