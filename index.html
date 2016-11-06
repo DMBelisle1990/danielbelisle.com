@@ -11,16 +11,34 @@
 </head>
 <body>
 <section class="content-container">
-
 	<header>
-		<nav class="header-nav">
-			<div class="header-nav-wrapper">
-				<ul id="upper-nav">
-					<li class="about-launch subpage-launch"><a href="#">About</a></li>
-					<li class="work-launch subpage-launch"><a href="#">Work</a></li>
-					<li class="contact-launch subpage-launch"><a href="#">Contact</a></li>
-				</ul>
+		<div class="hide-on-home">			
+			<div class="header-name">
+				<h1>Daniel Belisle</h1>			
 			</div>
+			<nav class="header-nav">
+				<div class="header-nav-wrapper">
+					<ul id="upper-nav">
+						<li class="about-launch subpage-launch"><a href="#">About</a></li>
+						<li class="work-launch subpage-launch"><a href="#">Work</a></li>
+						<li class="contact-launch subpage-launch"><a href="#">Contact</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>		
+		<nav class="social">
+			<a href="https://www.facebook.com/daniel.belisle.3591" class="facebook" target="_blank">
+				<i class="fa fa-facebook-square" aria-hidden="true"></i>
+			</a>
+			<a href="https://github.com/DMBelisle1990" class="github" target="_blank">
+				<i class="fa fa-github" aria-hidden="true"></i>
+			</a>
+			<a href="https://www.instagram.com/dmbelisle/" class="instagram" target="_blank">
+				<i class="fa fa-instagram" aria-hidden="true"></i>
+			</a>
+			<a href="https://www.linkedin.com/in/daniel-belisle-131b53bb" class="linkedin" target="_blank">
+				<i class="fa fa-linkedin-square" aria-hidden="true"></i>
+			</a>
 		</nav>
 		<div id="title-wrapper">
 			<h1 class="title-lg">Daniel Belisle</h1>
@@ -56,7 +74,42 @@
 	<div class="focus-underlay"></div>
 
 	<section id="about" class="pop-up">
-	
+		<div class="close">
+			<img src="images/down_arrow.svg" width="50">
+		</div>
+		<div class="about-content">
+			<div class="about-header">
+				<div id="profile-img">
+					<img src="images/profile.jpg" width="200">
+				</div>
+				<nav class="social">
+					<a href="https://www.instagram.com/dmbelisle/" class="instagram" target="_blank">
+						<i class="fa fa-instagram" aria-hidden="true"></i>
+					</a>
+					<a href="https://www.facebook.com/daniel.belisle.3591" class="facebook" target="_blank">
+						<i class="fa fa-facebook" aria-hidden="true"></i>
+					</a>
+					<a href="https://github.com/DMBelisle1990" class="github" target="_blank">
+						<i class="fa fa-github" aria-hidden="true"></i>
+					</a>
+					<a href="https://www.linkedin.com/in/daniel-belisle-131b53bb" class="linkedin" target="_blank">
+						<i class="fa fa-linkedin" aria-hidden="true"></i>
+					</a>
+					<a href="https://www.instagram.com/dmbelisle/" class="instagram" target="_blank">
+						<i class="fa fa-envelope-o" aria-hidden="true"></i>
+					</a>
+				</nav>
+			</div>
+			<p>Lorem ipsum dolor sit amet, cum nisl sumo id. Eos melius recteque id, quas ignota philosophia te vis. Vim etiam legendos petentium ex. Id nulla nemore pri, novum veniam prodesset mel ne. Per in tantas viderer, nam laudem reformidans ut, no esse tibique vis. Vis legere accumsan ne, et mel velit lobortis, tota eius temporibus cum ut. Iriure reprimique consectetuer ut vis, eam ne quot iudicabit, causae melius molestiae eum ad.</p>
+
+			<p>Ullum detraxit an has, in vidit postea aliquip usu. Ex quo labitur dolores, ad duo oporteat evertitur necessitatibus. Choro soleat aliquando vel cu. Natum vulputate ex eam, phaedrum deserunt pri te. Delenit ocurreret molestiae mea te, albucius probatus percipitur nam at.</p>
+
+			<p>Adhuc meliore principes vix te. Dico illud omittam ex sit, sed lorem dicit labore ne. Iriure vidisse te vis, eum ut nusquam hendrerit, ad eos vero tollit. Id labore fuisset volumus vix, cu qui congue fabulas, homero debitis reprimique ius ne. Ea sit aeque quidam invenire.</p>
+
+			<p>Legere probatus partiendo nec no, velit possit melius eum an. Est amet illud constituto at, cu duo natum scripta qualisque. Ex libris platonem aliquando eum, populo mollis vivendum vel et. Debitis placerat eu sit. His aeque tempor feugait et, accusata constituam ad cum, no usu vocent euismod explicari. Aeque legere doctus an mel, ludus ridens argumentum ei vis.</p>
+
+			<p>Pri at praesent reprimique scriptorem, est nominati rationibus at, per et vidit propriae. Prima atqui sapientem sea an, cu convenire honestatis pro. At vel vidisse equidem invenire, eos te habemus maiestatis sadipscing. Ornatus antiopam est ne, pri id iusto nonumes commune. Ea suas alia has.</p>
+		</div>
 	</section>
 
 	<section id="work" class="pop-up">
@@ -110,15 +163,9 @@
 		<p>Contact</p>
 	</section>
 
+	<script src="https://use.fontawesome.com/db28d190ee.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src='js/index.js'></script>
-	<script type="text/javascript">
-	$(".about-launch").on("click", function() {
-		$.ajax({url: "about/index.html", success: function(result){
-        	$("#about").html(result);
-    	}});
-	});
-	</script>
 </section>
 </body>
 </html>

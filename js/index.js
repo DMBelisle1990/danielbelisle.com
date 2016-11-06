@@ -2,7 +2,8 @@
 	'use strict';
 
 	const NAV_FADE = 200;
-	var $headerNav = $('.header-nav-wrapper ul');
+	var $headerInfo = $('.hide-on-home');
+	var $socialIcons = $('header .social');
 	var $activePage;
 	var $lowerNav = $('#lower-nav');
 	var $homeBg = $('.background.home');
@@ -10,6 +11,7 @@
 
 	// Using ES6 cleaner object notation, may need to change for friendlier backward compatability
 	var subpage = {
+
 		init(options) {
 			this.selector = options.selector;
 			this.hoverTrigger = options.hoverTrigger;
@@ -18,45 +20,54 @@
 			this.$close = options.selector.find($('.close'));
 			this.bindEvents();
 		},
+
 		bindEvents() {
 			this.hoverTrigger.hover(this.fadeInBg.bind(this), this.fadeOutBg.bind(this));
-  		$lowerNav.hover(function() {
-  			$homeBg.css({opacity: 0});
-  		}, function() {
-  			$homeBg.css({opacity: 1});
-  		});
+	  		$lowerNav.hover(function() {
+	  			$homeBg.css({opacity: 0});
+	  		}, function() {
+	  			$homeBg.css({opacity: 1});
+	  		});
 			this.clickTrigger.on('click', this.togglePage.bind(this));
 			this.$close.on('click', this.returnHome.bind(this));
 		},
+
 		fadeInBg() {
 			this.bg.css({'opacity': 1});
 		},
+
 		fadeOutBg() {
 			if(subpageHidden) {  // Only fades back to home BG if the subpage is hidden
 				this.bg.css({'opacity': 0});
 			}
 		},
+
 		togglePage() {
 			subpageHidden = false;
-			$headerNav.fadeIn(NAV_FADE);
+			$headerInfo.fadeIn(NAV_FADE);
 			if($activePage) {
 				$activePage.lower();
 			}
 			$activePage = this;
 			$activePage.raise();
 		},
+
 		raise() {
 			this.bg.css({'opacity': 1});
+			$socialIcons.css({'top': '-5px'});
 			this.selector.css({'top': '0%'});
 		},
+
 		lower() {
 			this.bg.css({'opacity': 0});
+			$socialIcons.css({'top': 0});
 			this.selector.css({'top': '105%'});
 		},
+
 		returnHome() {
 			this.lower.call($activePage);
 			subpageHidden = true;
-			$headerNav.fadeOut(NAV_FADE);
+			$headerInfo.fadeOut(NAV_FADE);
 			$activePage = null;
 		}
 	}
